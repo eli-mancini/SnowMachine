@@ -16,7 +16,7 @@ Images from Grand Mesa, Colorado and Okanogan, Washington were obtained through 
 
 Following the instructions from the original README document:
 
-# Forked repository set up and installation
+# Forked Repository Set Up and Installation
     !git clone https://github.com/eli-mancini/snowpoles
     %cd snowpoles
     !conda env update -f environment.yml
@@ -24,6 +24,6 @@ Following the instructions from the original README document:
     !conda activate snowkeypoint
     !python src/demo.py
 
-# Initial Photo labeling code
+# Initial Photo Labeling Code
     python preprocess/rename_photos.py
     python src/labeling.py --datapath 'SleepersRiver' --pole_length '121.92' --subset_to_label '10'
