@@ -1,4 +1,4 @@
-## Overview
+# Overview
 
 This is the GitHub repository for a snow depth machine learning model originally developed by Catherine Breen and published in July 2024. The original model used time-lapse photography of snowpacks in the Western United States in a machine-learning model to predict the heights of the snowpacks in each photo. This estimation was based on the change in the height of a snowpole, also present in the photo.
 
@@ -8,7 +8,7 @@ DOI for Breen et al. 2024:  https://doi.org/10.1029/2023WR036682
 Link to original GitHub repository:  https://github.com/catherine-m-breen/snowpoles
 
 
-## Data Preprocess Code and Data Download
+# Data Preprocess Code and Data Download
 
 The study site for this model is the Sleeper's River Research Watershed in Danville, Vermont, USA. The time-lapse photography images were accessed through a Research File Share using the Microsoft Remote Desktop application. Photos have not been uploaded yet due to technical difficulties, but they will be soon. 
 
@@ -16,7 +16,7 @@ Images from Grand Mesa, Colorado and Okanogan, Washington were obtained through 
 
 Following the instructions from the original README document:
 
-# Forked Repository Set Up and Installation
+## Forked Repository Set Up and Installation
     !git clone https://github.com/eli-mancini/snowpoles
     %cd snowpoles
     !conda env update -f environment.yml
@@ -24,6 +24,6 @@ Following the instructions from the original README document:
     !conda activate snowkeypoint
     !python src/demo.py
 
-# Initial Photo Labeling Code
+## Initial Photo Labeling Code
     python preprocess/rename_photos.py
     python src/labeling.py --datapath 'SleepersRiver' --pole_length '121.92' --subset_to_label '10'
