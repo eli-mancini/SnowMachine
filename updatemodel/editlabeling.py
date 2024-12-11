@@ -25,7 +25,7 @@ The labels.csv file can then be directly pointed at train.py for fine-tuning. Th
 
 example run
 
-python src/labeling.py --datapath 'nontrained_data' --pole_length '304.8' --subset_to_label '2'
+python src/labeling.py --datapath 'nontrained_data' --pole_length '168' --subset_to_label '2'
 
 '''
 
@@ -50,7 +50,7 @@ parser = argparse.ArgumentParser(description='Label snowpole images')
 parser.add_argument('--datapath', help='Path to image dir')
 parser.add_argument('--pole_length', help='Length of pole in cm', default = '100') ### assumes poles are 1 m / 100 cm tall
 parser.add_argument('--subset_to_label', help='# of images per camera to label', default = '10')
-args = parser.parse_args(['--datapath', '/content/drive/My Drive/starting_100', '--pole_length', '121.8', '--subset_to_label', '10'])
+args = parser.parse_args(['--datapath', '/content/drive/MyDrive/starting_100', '--pole_length', '168', '--subset_to_label', '10'])
 
 def main():
 
