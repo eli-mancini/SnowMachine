@@ -29,13 +29,10 @@ import torch
 import cv2
 import pandas as pd
 import numpy as np
-!pip install -q config
 import config
 from google.colab import files
 import io
-!pip install importlib
 import importlib
-!pip install -q sys
 import sys
 sys.path.append('/content/drive/MyDrive')
 import update2config
@@ -45,7 +42,6 @@ with open('/content/drive/MyDrive/updateconfig.py', 'r') as f:
     exec(notebook_content)
 importlib.reload(updateconfig)
 #import config_cpu as config ## for cpu training
-!pip install utils
 import utils
 from torch.utils.data import Dataset, DataLoader
 import IPython
