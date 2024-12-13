@@ -15,7 +15,6 @@ adapted from:
 https://debuggercafe.com/advanced-facial-keypoint-detection-with-pytorch/
 
 '''
-git clone https://github.com/eli-mancini/SnowMachine
 # %cd SnowMachine
 import torch.nn as nn
 import torch.nn.functional as F
