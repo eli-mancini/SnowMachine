@@ -39,11 +39,11 @@ import importlib
 import sys
 sys.path.append('/content/drive/MyDrive')
 import update2config
-update2config.ROOT_PATH = '/content/drive/MyDrive/folders/starting_100'
-with open('/content/drive/MyDrive/update2config.py', 'r') as f:
+updateconfig.ROOT_PATH = '/content/drive/MyDrive/folders/starting100'
+with open('/content/drive/MyDrive/updateconfig.py', 'r') as f:
     notebook_content = f.read()
     exec(notebook_content)
-importlib.reload(update2config)
+importlib.reload(updateconfig)
 #import config_cpu as config ## for cpu training
 !pip install utils
 import utils
@@ -83,10 +83,10 @@ def train_test_split(csv_path, image_path):
     training_samples = training_samples[training_samples['filename'].isin(filenames)].reset_index()
 
     # save labels to output folder
-    if not os.path.exists(f"{update2config.OUTPUT_PATH}"):
-            os.makedirs(f"{update2config.OUTPUT_PATH}", exist_ok=True)
-    training_samples.to_csv(f"{update2config.OUTPUT_PATH}/training_samples.csv")
-    valid_samples.to_csv(f"{update2config.OUTPUT_PATH}/valid_samples.csv")
+    if not os.path.exists(f"{updateconfig.OUTPUT_PATH}"):
+            os.makedirs(f"{updateconfig.OUTPUT_PATH}", exist_ok=True)
+    training_samples.to_csv(f"{updateconfig.OUTPUT_PATH}/training_samples.csv")
+    valid_samples.to_csv(f"{updateconfig.OUTPUT_PATH}/valid_samples.csv")
 
     print(f'# of examples we will now train on {len(training_samples)}, val on {len(valid_samples)}')
 
@@ -164,7 +164,7 @@ class snowPoleDataset(Dataset):
 directory_path = f"{update2config.ROOT_PATH}"
 
 labels = "/content/drive/MyDrive/starting100/labels.csv"
-def my_train_test_split(labels,update2config): #removed .ROOT_PATH
+def my_train_test_split(labels,updateconfig): #removed .ROOT_PATH
     df_data = pd.read_csv(labels)
     print(f'all rows in df_data {len(df_data.index)}')
 
@@ -176,25 +176,25 @@ training_samples, valid_samples = my_train_test_split(labels, update2config)
 
 # initialize the dataset - `snowPoleDataset()`
 train_data = snowPoleDataset(training_samples,
-                                 f"{update2config.ROOT_PATH}", aug = update2config.AUG)  ## we want all folders
+                                 f"{updateconfig.ROOT_PATH}", aug = update2config.AUG)  ## we want all folders
 
 valid_data = snowPoleDataset(valid_samples,
-                                 f"{update2config.ROOT_PATH}", aug = False) # we always want the transform to be the normal transform
+                                 f"{updateconfig.ROOT_PATH}", aug = False) # we always want the transform to be the normal transform
 camera_folder = directory_path
 all_images = glob.glob(os.path.join(camera_folder, '*.JPG'))
 filenames = [os.path.basename(item) for item in all_images]
 
-print(f"Checking for images in: {update2config.ROOT_PATH}")
+print(f"Checking for images in: {updateconfig.ROOT_PATH}")
 camera_folder = directory_path
 \
 all_images = glob.glob(os.path.join(camera_folder, '*.JPG'))
 filenames = [os.path.basename(item) for item in all_images]
 # prepare data loaders
 train_loader = DataLoader(train_data,
-                          batch_size=update2config.BATCH_SIZE,
+                          batch_size=updateconfig.BATCH_SIZE,
                           shuffle=True, num_workers = 0)
 valid_loader = DataLoader(valid_data,
-                          batch_size=update2config.BATCH_SIZE,
+                          batch_size=updateconfig.BATCH_SIZE,
                           shuffle=False, num_workers = 0)
 
 print(f"Training sample instances: {len(train_data)}")
