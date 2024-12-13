@@ -18,7 +18,6 @@ https://debuggercafe.com/advanced-facial-keypoint-detection-with-pytorch/
 # %cd SnowMachine
 import torch.nn as nn
 import torch.nn.functional as F
-!pip install pretrainedmodels
 import pretrainedmodels
 
 class snowPoleResNet50(nn.Module):
