@@ -63,7 +63,7 @@ parser.add_argument('--datapath', type=str, help='Path to the directory containi
 parser.add_argument('--pole_length', type=int, default='168', help='Length of the pole in cm.')
 parser.add_argument('--subset_to_label', type=int, default=5, help='Subset of images to label (e.g., every 2nd image).')
 parser.add_argument('-lengths_file', type=str, default=None, help='path to csv file with lengths')
-parser.set_defaults(datapath='/content/drive/MyDrive/starting100', pole_length='168', subset_to_label='2', lengths_file='/content/drive/MyDrive/updatelengths.csv')
+parser.set_defaults(datapath='/content/drive/MyDrive/starting100', pole_length='168', subset_to_label='1', lengths_file='/content/drive/MyDrive/updatelengths.csv')
 args = parser.parse_args([])
 
 def main():
