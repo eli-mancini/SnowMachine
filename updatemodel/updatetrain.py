@@ -26,6 +26,8 @@ python src/train.py
 '''
 
 # import time
+import sys
+   sys.path.append('/usr/local/lib/python3.10/dist-packages/')
 import google.colab
 from google.colab import drive
 drive.mount('/content/drive')
