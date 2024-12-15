@@ -39,7 +39,8 @@ python src/labeling.py --datapath 'nontrained_data' --pole_length '168' --subset
 '''
 
 import cv2
-!pip install -q google.colab
+import sys
+   sys.path.append('/usr/local/lib/python3.10/dist-packages/')
 import google.colab
 import matplotlib.pyplot as plt
 import glob
