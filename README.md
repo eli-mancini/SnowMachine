@@ -83,4 +83,18 @@ This initial model doesn’t exactly answer the question of whether the original
 
 This project was intended to be the ‘first copy’ of a snowdepth keypoint detection model using 24 hour timelapse photography, as prior studies have either ignored or had issues with using nighttime images in their models. When considering the important relationship between snowdepth and properties such as SWE, accurate measurements during all times of day are important. This keypoint detection model was based on an original model created by Breen et al. (2024). This was a 50 layer convolutional neural network (CNN) model that was finetuned to predict snowdepths based on snowpole imagery taken during the day and night. The model was also finetuned using Google Colab, an accessible but less robust virtual machine. As expected, the research question of whether this original model can be retrained to accurately detect keypoints of snowpoles at different times of day is not clear. The model was overall not well fit for the data. The sample size of 95 images is just too small to assume that these statistics would be similar in a finetuned model with a larger sample size. However, seeing similar residual errors between snowdepth groups of images taken at both day and night gives promise that this consistency in fit might continue if the model is retrained on a larger set of images. Additionally, not running a quantized version of the model could prove to show more accurate model fitting. With a larger sample size, a better virtual machine, and a little bit more time, this model could be retrained to detect accurate keypoints of snowpoles both day and night across all snowdepths. 
 
+**References**
+
+Bongio, M., Arslan, A. N., Tanis, C. M., & De Michele, C. (2021). Snow depth time series retrieval by time-lapse photography: Finnish and Italian case studies. The Cryosphere, 15(1), 369–387. https://doi.org/10.5194/tc-15-369-2021
+
+Breen, C. M., Currier, W. R., Vuyovich, C., Miao, Z., & Prugh, L. R. (2024). Snow Depth Extraction From Time‐Lapse Imagery Using a Keypoint Deep Learning Model. Water Resources Research, 60(7), e2023WR036682. https://doi.org/10.1029/2023WR036682
+
+Gupta, J., Pathak, S., & Kumar, G. (2022). Deep Learning (CNN) and Transfer Learning: A Review. Journal of Physics: Conference Series, 2273(1), 012029. https://doi.org/10.1088/1742-6596/2273/1/012029
+
+Hill, D. F., Burakowski, E. A., Crumley, R. L., Keon, J., Hu, J. M., Arendt, A. A., Wikstrom Jones, K., and Wolken, G. J. (2019). Converting snow depth to snow water equivalent using climatological variables. The Cryosphere, 13, 1767–1784. https://doi.org/10.5194/tc-13-1767-2019, 2019.
+
+Odry, J., Boucher, M. A., Cantet, P., Lachance-Cloutier, S., Turcotte, R., & St-Louis, P. Y. (2020). Using artificial neural networks to estimate snow water equivalent from snowdepth. Canadian Water Resources Journal / Revue Canadienne Des Ressources Hydriques, 45(3), 252–268. https://doi.org/10.1080/07011784.2020.1796817
+
+Petrakis, G., & Partsinevelos, P. (2023). Keypoint Detection and Description through Deep Learning in Unstructured Environments. Robotics, 12(5), 137. https://doi.org/10.3390/robotics12050137
+
 
