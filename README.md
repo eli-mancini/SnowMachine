@@ -1,3 +1,5 @@
+****Research Paper****
+
 **Introduction/Overview**
 
 Snowdepth measurement is extremely important, as snowdepth is linked to other snow properties and decisions regarding water resource management. One of this properties is Snow Water Equivalent (SWE), which is the amount of available water in a snowpack if it melted entirely. SWE is important to measure because snow and snowmelt play a large role in the hydrological cycle for many areas of the world (Hill et al. 2019). For example, if there is a high amount of SWE across a large area, the melting of the snow could possibly cause flooding due to the amount of water that would be released with that melt. However, SWE is hard to measure and sometimes sensitive to the method of measurement as well (Hill et al. 2019). Snowdepth is an easy to measure and clear property of a snowpack, and many studies have found that there is a relationship between snowdpeth and SWE. Therefore, measuring snowdepth can give some insight into what the SWE of a snowpack might be.
