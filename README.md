@@ -71,6 +71,7 @@ After making your updates, be sure that the new module names (if changed) are re
 The last part of finetuning the model is running the predictions! This will be done by updatepredict.py
 
 In your main Google Colab file:
+
 	!python Code/updatepredict.py \
  	--model_path /content/drive/MyDrive/[FOLDER WHERE MODEL IS]/model.pth \
   	--img_dir /content/drive/MyDrive/[IMAGE FOLDER]
@@ -82,6 +83,7 @@ Due to this initial finetuning being run in Google Colab where there is a limite
         	model, {torch.nn.Linear}, dtype=torch.qint8)
     	quantized_model.eval()
     	return quantized_model
+     
 Be sure to update links to your image directory and other modules as well.
 This module will produce a results.csv that will give you the predicted snowdepths from your validation set. This can be easily combined in a separate .csv with the actual snowdepths that can be used for statistics and figure creation.
 
