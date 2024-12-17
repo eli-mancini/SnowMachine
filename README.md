@@ -1,3 +1,90 @@
+## Overview ##
+
+This is the repository for a keypoint detection machine learning model that accurately measures snowdepth from timelapse imagery of snowpoles. The model in this repository is a finetuned version of the model originally created by Breen et al. (2024). The finetuned version seeks to accurately predict the snowdepth from images taken during the day and night. The images used for this finetuning were taken in the Sleeper's River Research Watershed in Danville, VT. This model was finetuned on only 95 images, so the accuracy is still being improved as of December 2024.
+
+![WSCT0202_20211119_011833](https://github.com/user-attachments/assets/5abbc757-0a26-459e-94a6-813454869003)
+
+**Navigating This Repository**
+
+To give credit where credit is due, the instructions on how to finetune this model are available on Catherine Breen's Github: https://github.com/catherine-m-breen/snowpoles
+All of Breen's original folders and provided code are in this repository in addition to the finetuned code.
+
+This document will go over how to approach finetuning Breen's model using Google Colab and ImageJ software. There isn't specific hardware that needs to be used, a CPU is totally fine.
+
+**Before Coding**
+
+Before beginning to code, you will need to set up a folder in your Google Drive that contains all of the photos you would like to finetune the model with. Additionally, you'll want to create a copy of Breen's GitHub repository (link above) to make your edits. 
+
+**Initial Set Up**
+
+In a new Google Colab file, you'll want to import your Google Drive and cloned repository in addition to Breen's python environment and 'demo' version of the original model. This model is stored in the 'src' folder, which contains the code written by Breen.
+
+	!pip install -q google
+ 	import google.colab
+  	from google.colab import drive
+   	drive.mount('/content/drive')
+    	!git clone [LINK TO CLONED REPOSITORY]
+     	%cd CLONEDREPOSITORY
+      	!conda env update -f environment.yml
+       	!conda activate snowkeypoint
+	!python src/demo.py
+
+**Preprocessing to Retrain**
+
+Retraining the model includes 4 steps: Labeling your photos, finetuning the model with the train.py module, predicting the pole lengths using predict.py, and optionally using depth_conversion.py to get the snowdepth. The predict.py module will also give you the snowdepth, and for this initial finetuning I did not use the depth_conversion.py module.
+
+**Renaming Photos & Labeling**
+The rename_photos.py module checks to make sure the image filenames are in the appropriate format for the model and updates them if not. It assumes that the photos are in a folder labeled with the camera name, although this is not important if all photos are from the same camera.
+
+Labeling your photos in Google Colab will be a little bit different than what is described in Breen's README document. The labeling.py module uses the _ginput_ function, which is interactive and not available on Google Colab. Instead, use ImageJ (https://ij.imjoy.io/) to find the pixel coordinates of the top and bottom of the snowpole in each image. These pixel coordinates should be put in a .csv file with the filename, datetime. You should make another .csv file with the filename, datetime, and actual snowdepth. Upload the .csvs into your google drive, and later into the labeling.py module. 
+
+In the Google Colab file where you set your working directory to your repository:
+	!python preprocess/rename_photos.py
+ 	!python code/editlabeling.py --datapath [/content/drive/MyDrive/IMAGEFOLDER] --pole_length [POLE LENGTH IN CM] --subset_to_label [# BETWEEN LABELED IMAGES]
+
+This is the code that allows you to import a .csv file from ImageJ with the pixel coordinates into the editlabeling.py module:
+	coords_df = pd.read_csv('/content/drive/MyDrive/[IMAGEJ PIXEL COORDINATES.csv')
+Later in the main argument, after '#loop to label nth photo!':
+ 	lengths_df = None
+  	if args.length_file:
+   		lengths_df=pd.read_csv(args.lengths_file)
+This will set up loading in the second .csv file with the actual snowdepths, which will be input later in the script:
+
+          if lengths_df is not None:
+            length_row = lengths_df[lengths_df['filename']== base_filename]
+          else:
+            length_row= pd.read_csv('/content/drive/MyDrive/[ACTUAL SNOWDEPTHS].csv')
+After making these changes and running the module, you should get a labels.csv and a metadata.csv.
+
+**Training the Model**
+
+In the original Google Colab file, you're going to run the command:
+	!python Code/updatetrain.py
+However, in order for updatetrain.py to run, you're going to need to make edits to updateconfig.py, updateutils.py, and updatedataset.py modules. The edits in these modules will simply consist of putting the google drive links for your image directory/folder, the folder where you would like the trained model objects to be stored, and the links for your metadata and labels .csv files created by the editlabeling.py module. This will make sure that you are properly retraining the model with your data, and will split and create a training and validation dataset. These will be stored as .csv files in whatever folder you specify them to be in.
+
+After making your updates, be sure that the new module names (if changed) are reflected in the updatetrain.py module. It's important as well to have copies of model.py and downloadmodel.py in your google drive so that they can be accessed by the other modules if necessary. Updatetrain.py will ultimately create the model.pth and modelepoch0.pth along with the training and validation loss figure, which will be stored in your model output folder. 
+
+**Snowdepth Predictions**
+
+The last part of finetuning the model is running the predictions! This will be done by updatepredict.py
+
+In your main Google Colab file:
+	!python Code/updatepredict.py \
+ 	--model_path /content/drive/MyDrive/[FOLDER WHERE MODEL IS]/model.pth \
+  	--img_dir /content/drive/MyDrive/[IMAGE FOLDER]
+   	--metadata /content/drive/MyDrive/[FOLDER WHERE METADATA IS]/pole_metadata.csv
+
+Due to this initial finetuning being run in Google Colab where there is a limited amount of RAM and memory usage, a quantized model had to be run. This is reflected in the updatepredict.py module:
+
+	quantized_model = torch.quantization.quantize_dynamic(
+        	model, {torch.nn.Linear}, dtype=torch.qint8)
+    	quantized_model.eval()
+    	return quantized_model
+Be sure to update links to your image directory and other modules as well.
+This module will produce a results.csv that will give you the predicted snowdepths from your validation set. This can be easily combined in a separate .csv with the actual snowdepths that can be used for statistics and figure creation.
+
+As the finetuned model is not complete and the original model is not mine, merge requests will not be considered at this time. There is no specific license for this model, and the credit for the creation of this model should be attributed to Catherine Breen (et al.). 
+
 ## Research Paper ##
 
 **Introduction/Overview**
