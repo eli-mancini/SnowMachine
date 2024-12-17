@@ -59,7 +59,9 @@ After making these changes and running the module, you should get a labels.csv a
 **Training the Model**
 
 In the original Google Colab file, you're going to run the command:
+
 	!python Code/updatetrain.py
+ 
 However, in order for updatetrain.py to run, you're going to need to make edits to updateconfig.py, updateutils.py, and updatedataset.py modules. The edits in these modules will simply consist of putting the google drive links for your image directory/folder, the folder where you would like the trained model objects to be stored, and the links for your metadata and labels .csv files created by the editlabeling.py module. This will make sure that you are properly retraining the model with your data, and will split and create a training and validation dataset. These will be stored as .csv files in whatever folder you specify them to be in.
 
 After making your updates, be sure that the new module names (if changed) are reflected in the updatetrain.py module. It's important as well to have copies of model.py and downloadmodel.py in your google drive so that they can be accessed by the other modules if necessary. Updatetrain.py will ultimately create the model.pth and modelepoch0.pth along with the training and validation loss figure, which will be stored in your model output folder. 
